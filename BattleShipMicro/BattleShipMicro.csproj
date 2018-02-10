@@ -59,6 +59,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BattleShipTests.cs" />
+    <Compile Include="IOrientation.cs" />
+    <Compile Include="Orientation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

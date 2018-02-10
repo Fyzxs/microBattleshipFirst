@@ -6,7 +6,7 @@ using System.Linq;
 namespace BattleShipMicro
 {
     [TestClass]
-    public class BattleShipTests
+    public class ShipTests
     {
         [TestMethod]
         public void AircraftCarrierReturnsSpecifiedIndicatorForBeingAtPointHorizontally()

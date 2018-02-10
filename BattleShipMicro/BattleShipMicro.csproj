@@ -67,10 +67,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BattleShipTests.cs" />
-    <Compile Include="IOrientation.cs" />
     <Compile Include="IResult.cs" />
     <Compile Include="IShip.cs" />
-    <Compile Include="Orientation.cs" />
+    <Compile Include="ShipDetector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Result.cs" />
   </ItemGroup>

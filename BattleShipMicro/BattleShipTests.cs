@@ -9,63 +9,73 @@ namespace BattleShipMicro
     public class BattleShipTests
     {
         [TestMethod]
-        public void AircraftCarrierReturnsSpecifiedIndicatorForBeingAtPoint()
+        public void AircraftCarrierReturnsSpecifiedIndicatorForBeingAtPointHorizontally()
         {
-            IShip subject = new AircraftCarrier(0, 0, Orientation.Horizontal);
+            IShip subject = new AircraftCarrier(new HorizontalShipDetector(0, 0));
             IResult result = subject.At(0, 0);
             result.ToString().Should().Be("A");
         }
         [TestMethod]
-        public void AircraftCarrierReturnsSpecifiedIndicatorForNotBeingAtPoint()
+        public void AircraftCarrierReturnsSpecifiedIndicatorForNotBeingAtPointHorizontally()
         {
-            IShip subject = new AircraftCarrier(0, 0, Orientation.Horizontal);
+            IShip subject = new AircraftCarrier(new HorizontalShipDetector(0, 0));
             IResult result = subject.At(1, 1);
             result.ToString().Should().Be("");
         }
         [TestMethod]
-        public void AircraftCarrierReturnsSpecifiedIndicatorForHorizontalLessThanPoint()
+        public void AircraftCarrierReturnsSpecifiedIndicatorForLessThanPointHorizontally()
         {
-            IShip subject = new AircraftCarrier(1, 0, Orientation.Horizontal);
-            IResult result = subject.At(0, 1);
+            IShip subject = new AircraftCarrier(new HorizontalShipDetector(1, 0));
+            IResult result = subject.At(0, 0);
             result.ToString().Should().Be("");
         }
         [TestMethod]
-        public void AircraftCarrierReturnsSpecifiedIndicatorForHorizontalHigherThanPoint()
+        public void AircraftCarrierReturnsSpecifiedIndicatorForHigherThanPointHorizontally()
         {
-            IShip subject = new AircraftCarrier(1, 0, Orientation.Horizontal);
+            IShip subject = new AircraftCarrier(new HorizontalShipDetector(1, 1));
             IResult result = subject.At(10, 1);
+            result.ToString().Should().Be("");
+        }
+        [TestMethod]
+        public void AircraftCarrierReturnsSpecifiedIndicatorForNotBeingAtPointVertically()
+        {
+            IShip subject = new AircraftCarrier(new VerticalShipDetector(0, 0));
+            IResult result = subject.At(1, 1);
+            result.ToString().Should().Be("");
+        }
+        [TestMethod]
+        public void AircraftCarrierReturnsSpecifiedIndicatorForLessThanPointVertically()
+        {
+            IShip subject = new AircraftCarrier(new VerticalShipDetector(1, 1));
+            IResult result = subject.At(1, 0);
+            result.ToString().Should().Be("");
+        }
+        [TestMethod]
+        public void AircraftCarrierReturnsSpecifiedIndicatorForHigherThanPointVertically()
+        {
+            IShip subject = new AircraftCarrier(new VerticalShipDetector(0, 0));
+            IResult result = subject.At(0, 10);
             result.ToString().Should().Be("");
         }
 
     }
 
-    public class AircraftCarrier : IShip
+    public abstract class Ship : IShip
     {
-        private const int _size = 5;
-        private readonly int _horzCoord;
-        private readonly int _vertCoord;
-        private readonly IOrientation _orientation;
+        private readonly ShipDetector _shipDetector;
 
-        public AircraftCarrier(int horzCoord, int vertCoord, IOrientation orientation)
-        {
-            _horzCoord = horzCoord;
-            _vertCoord = vertCoord;
-            _orientation = orientation;
-        }
+        protected Ship(ShipDetector shipDetector) => _shipDetector = shipDetector;
 
+        protected abstract int Size();
 
-        public IResult At(int horzCoord, int vertCoord)
-        {
-            if (_orientation.IsHorizontal())
-            {
-                if (horzCoord < _horzCoord)
-                    return new Result("");
-                if (_horzCoord + _size <= horzCoord)
-                    return new Result("");
-                if (vertCoord != _vertCoord)
-                    return new Result("");
-            }
-            return new Result("A");
-        }
+        public IResult At(int horzCoord, int vertCoord) =>
+            _shipDetector.IsAt(horzCoord, vertCoord, Size()) ? new Result("A") : new Result("");
+    }
+
+    public class AircraftCarrier : Ship
+    {
+        public AircraftCarrier(ShipDetector shipDetector) : base(shipDetector) { }
+
+        protected override int Size() => 5;
     }
 }

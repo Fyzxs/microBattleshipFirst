@@ -2,9 +2,9 @@
 {
     public class FinalResult
     {
-        private readonly IResult _aggregate;
+        private readonly IDisplay _aggregate;
 
-        public FinalResult(IResult aggregate)
+        public FinalResult(IDisplay aggregate)
         {
             _aggregate = aggregate;
         }

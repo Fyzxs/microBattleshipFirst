@@ -5,7 +5,7 @@
         public Carrier(ShipDetector shipDetector) : base(shipDetector) { }
 
         protected override int Size() => 5;
-        protected override IResult Result() => new Result("A");
-        protected override IResult HitResult() => new Result("a");
+        protected override IDisplay Display() => new Display("A");
+        protected override IDisplay HitDisplay() => new Display("a");
     }
 }

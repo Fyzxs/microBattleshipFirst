@@ -5,8 +5,8 @@
 
         protected override int Size() => 3;
 
-        protected override IResult Result() => new Result("C");
+        protected override IDisplay Display() => new Display("C");
 
-        protected override IResult HitResult() => new Result("c");
+        protected override IDisplay HitDisplay() => new Display("c");
     }
 }

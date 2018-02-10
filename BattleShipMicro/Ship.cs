@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace BattleShipMicro {
+namespace BattleShipMicro
+{
     public abstract class Ship : IShip
     {
         private readonly List<KeyValuePair<int, int>> _hits = new List<KeyValuePair<int, int>>();//So wants to be a thing
@@ -11,11 +12,11 @@ namespace BattleShipMicro {
 
         protected abstract int Size();
 
-        protected abstract IResult Result();
-        protected abstract IResult HitResult();
+        protected abstract IDisplay Display();
+        protected abstract IDisplay HitDisplay();
 
-        public IResult At(int horzCoord, int vertCoord) =>
-            _shipDetector.IsAt(horzCoord, vertCoord, Size()) ? InternalResult(horzCoord, vertCoord) : new Result("");
+        public IDisplay At(int horzCoord, int vertCoord) =>
+            _shipDetector.IsAt(horzCoord, vertCoord, Size()) ? InternalResult(horzCoord, vertCoord) : new Display("");
 
         public bool HitAt(int horzCoord, int vertCoord)
         {
@@ -26,7 +27,7 @@ namespace BattleShipMicro {
             return true;
         }
 
-        private IResult InternalResult(int horzCoord, int vertCoord) => IsHitAt(horzCoord, vertCoord) ? HitResult() : Result();
+        private IDisplay InternalResult(int horzCoord, int vertCoord) => IsHitAt(horzCoord, vertCoord) ? HitDisplay() : Display();
         private bool IsHitAt(int horzCoord, int vertCoord) => _hits.Any(hit => hit.Key == horzCoord && hit.Value == vertCoord);
     }
 }

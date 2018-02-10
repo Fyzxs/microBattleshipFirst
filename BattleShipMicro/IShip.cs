@@ -2,7 +2,7 @@
 {
     public interface IShip
     {
-        IResult At(int horzCoord, int vertCoord);
+        IDisplay At(int horzCoord, int vertCoord);
         bool HitAt(int horzCoord, int vertCoord);
     }
 }

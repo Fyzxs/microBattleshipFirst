@@ -20,7 +20,7 @@
     {
         public HorizontalShipDetector(int horzCoord, int vertCoord) : base(horzCoord, vertCoord) { }
         public override bool IsAt(int horzTargetCoord, int vertTargetCoord, int size) =>
-            IsAtInternal(vertTargetCoord, horzTargetCoord, size);
+            IsAtInternal(horzTargetCoord, vertTargetCoord, size);
     }
 
     public class VerticalShipDetector : ShipDetector

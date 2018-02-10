@@ -1,4 +1,5 @@
-﻿namespace BattleShipMicro {
+﻿namespace BattleShipMicro
+{
     public class Result : IResult
     {
         private readonly string _result;

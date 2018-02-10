@@ -9,49 +9,49 @@ namespace BattleShipMicro
         [TestMethod]
         public void AircraftCarrierReturnsSpecifiedIndicatorForBeingAtPointHorizontally()
         {
-            IShip subject = new AircraftCarrier(new HorizontalShipDetector(0, 0));
+            IShip subject = new Carrier(new HorizontalShipDetector(0, 0));
             IResult result = subject.At(0, 0);
             result.ToString().Should().Be("A");
         }
         [TestMethod]
         public void AircraftCarrierReturnsSpecifiedIndicatorForNotBeingAtPointHorizontally()
         {
-            IShip subject = new AircraftCarrier(new HorizontalShipDetector(0, 0));
+            IShip subject = new Carrier(new HorizontalShipDetector(0, 0));
             IResult result = subject.At(1, 1);
             result.ToString().Should().Be("");
         }
         [TestMethod]
         public void AircraftCarrierReturnsSpecifiedIndicatorForLessThanPointHorizontally()
         {
-            IShip subject = new AircraftCarrier(new HorizontalShipDetector(1, 0));
+            IShip subject = new Carrier(new HorizontalShipDetector(1, 0));
             IResult result = subject.At(0, 0);
             result.ToString().Should().Be("");
         }
         [TestMethod]
         public void AircraftCarrierReturnsSpecifiedIndicatorForHigherThanPointHorizontally()
         {
-            IShip subject = new AircraftCarrier(new HorizontalShipDetector(1, 1));
+            IShip subject = new Carrier(new HorizontalShipDetector(1, 1));
             IResult result = subject.At(10, 1);
             result.ToString().Should().Be("");
         }
         [TestMethod]
         public void AircraftCarrierReturnsSpecifiedIndicatorForNotBeingAtPointVertically()
         {
-            IShip subject = new AircraftCarrier(new VerticalShipDetector(0, 0));
+            IShip subject = new Carrier(new VerticalShipDetector(0, 0));
             IResult result = subject.At(1, 1);
             result.ToString().Should().Be("");
         }
         [TestMethod]
         public void AircraftCarrierReturnsSpecifiedIndicatorForLessThanPointVertically()
         {
-            IShip subject = new AircraftCarrier(new VerticalShipDetector(1, 1));
+            IShip subject = new Carrier(new VerticalShipDetector(1, 1));
             IResult result = subject.At(1, 0);
             result.ToString().Should().Be("");
         }
         [TestMethod]
         public void AircraftCarrierReturnsSpecifiedIndicatorForHigherThanPointVertically()
         {
-            IShip subject = new AircraftCarrier(new VerticalShipDetector(0, 0));
+            IShip subject = new Carrier(new VerticalShipDetector(0, 0));
             IResult result = subject.At(0, 10);
             result.ToString().Should().Be("");
         }
@@ -59,7 +59,7 @@ namespace BattleShipMicro
         [TestMethod]
         public void AircraftCarrierReturnsSpecifiedIndicatorForBeingHitAtPointHorizontally()
         {
-            IShip subject = new AircraftCarrier(new HorizontalShipDetector(0, 0));
+            IShip subject = new Carrier(new HorizontalShipDetector(0, 0));
             subject.HitAt(0, 0);
             IResult result = subject.At(0, 0);
             result.ToString().Should().Be("a");

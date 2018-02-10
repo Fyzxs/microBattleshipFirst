@@ -1,5 +1,5 @@
-﻿using ApprovalTests;
-using ApprovalTests.Reporters;
+﻿using ApprovalTests.Reporters;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BattleShipMicro
@@ -9,48 +9,32 @@ namespace BattleShipMicro
     public class BattleShipTests
     {
         [TestMethod]
-        public void AircraftCarrierHorizontal()
-        {
-            IShip subject = new AircraftCarrier(0, 0, Orientation.Horizontal);
-
-            Approvals.Verify(subject);
-        }
-        [TestMethod]
-        public void AircraftCarrierVerical()
-        {
-            IShip subject = new AircraftCarrier(0, 0, Orientation.Vertical);
-
-            Approvals.Verify(subject);
-        }
-
-
-        [TestMethod]
         public void AircraftCarrierReturnsSpecifiedIndicatorForBeingAtPoint()
         {
             IShip subject = new AircraftCarrier(0, 0, Orientation.Horizontal);
             IResult result = subject.At(0, 0);
-            Approvals.Verify(result);
+            result.ToString().Should().Be("A");
         }
         [TestMethod]
         public void AircraftCarrierReturnsSpecifiedIndicatorForNotBeingAtPoint()
         {
             IShip subject = new AircraftCarrier(0, 0, Orientation.Horizontal);
             IResult result = subject.At(1, 1);
-            Approvals.Verify(result);
+            result.ToString().Should().Be("");
         }
         [TestMethod]
         public void AircraftCarrierReturnsSpecifiedIndicatorForHorizontalLessThanPoint()
         {
             IShip subject = new AircraftCarrier(1, 0, Orientation.Horizontal);
             IResult result = subject.At(0, 1);
-            Approvals.Verify(result);
+            result.ToString().Should().Be("");
         }
         [TestMethod]
         public void AircraftCarrierReturnsSpecifiedIndicatorForHorizontalHigherThanPoint()
         {
             IShip subject = new AircraftCarrier(1, 0, Orientation.Horizontal);
             IResult result = subject.At(10, 1);
-            Approvals.Verify(result);
+            result.ToString().Should().Be("");
         }
 
     }
@@ -69,10 +53,6 @@ namespace BattleShipMicro
             _orientation = orientation;
         }
 
-        public override string ToString()
-        {
-            return _orientation.IsHorizontal() ? "AAAAA" : "A\nA\nA\nA\nA";
-        }
 
         public IResult At(int horzCoord, int vertCoord)
         {

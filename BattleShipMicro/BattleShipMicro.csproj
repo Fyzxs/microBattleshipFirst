@@ -66,6 +66,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AircraftCarrier.cs" />
+    <Compile Include="Ship.cs" />
     <Compile Include="ShipTests.cs" />
     <Compile Include="IResult.cs" />
     <Compile Include="IShip.cs" />
